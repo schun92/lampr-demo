@@ -2,5 +2,5 @@
     
 $host = '<DATABASE HOST>';
 $database = '<DATABASE NAME>';
-$user ='<DATABASE USER';
+$user = '<DATABASE USER>';
 $password = '<DATABASE USER PASSWORD>';

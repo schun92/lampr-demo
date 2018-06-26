@@ -1,4 +1,19 @@
+.to-do-list h1 {
+    font-family: quest;
+    font-size: 6em;
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, .5);
+}
+
+.to-do-list .item-title {
+    padding-top: 10px;
+}
+
 .completed {
     color: lightgray;
     text-decoration: line-through;
+}
+
+li button:first-of-type {
+    margin-right: 10px;
 }

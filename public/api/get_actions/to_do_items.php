@@ -1,6 +1,6 @@
 <?php
 
-$query = 'SELECT * FROM items';
+$query = 'SELECT `id`, `title`, `complete` FROM items';
 
 $result = mysqli_query($db, $query);
 
