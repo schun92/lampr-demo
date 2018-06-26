@@ -7,22 +7,6 @@ $output = [
 
 require_once('db_connect.php');
 
-// echo '<pre> GET';
-// print_r($_GET);
-// echo '</pre>';
-
-// echo '<pre> POST';
-// print_r($_POST);
-// echo '</pre>';
-
-// parse_str(file_get_contents('php://input'), $data);
-
-// echo '<pre> OTHER';
-// print_r($data);
-// echo '</pre>';
-
-// print $_SERVER['REQUEST_METHOD'];
-
 $method = $_SERVER['REQUEST_METHOD'];
 
 $action = $_GET['action'];
@@ -33,6 +17,13 @@ switch($method){
         break;
     case 'POST':
         include_once("post_actions/$action.php");
+        break;
+    case 'DELETE':
+        include_once("delete_actions/$action.php");
+        break;
+    case 'PATCH':
+        $data = json_decode(file_get_contents('php://input'), true);
+        include_once("patch_actions/$action.php");
         break;
     default: 
         $output['error'] = "Unknown request method: '$method'";
