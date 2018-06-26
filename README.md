@@ -1,4 +1,6 @@
-# PHP React Starter
+<img align="right" width="150" src="https://github.com/scbowler/react-php/blob/master/public/php-react.png">
+
+# PHP React Starter 
 
 > This repo contains boilerplate code to aid in the creation of a new React app with Redux and a PHP back-end. Follow the below setup instructions to get started.
 
