@@ -16,7 +16,7 @@ class ToDoList extends Component {
                 details: ''
             },
             submitted: false,
-            error: 'Loading',
+            message: 'Loading',
             errors: []
         };
 
@@ -32,17 +32,17 @@ class ToDoList extends Component {
     async getListData() {
         const response = await axios.get('/api/index.php?action=to_do_items');
 
-        const { error, listItems } = response.data;
+        const { message, listItems } = response.data;
 
         let newState = {
             list: [],
-            error: ''
+            message: ''
         };
 
         if(listItems){
             newState.list = listItems;
-        } else if (error){
-            newState.error = error
+        } else if (message){
+            newState.message = message;
         }
 
         this.setState(newState);
@@ -110,9 +110,9 @@ class ToDoList extends Component {
     }
 
     render() {
-        const { error, errors, list, submitted, newItem: { title, details } } = this.state;
+        const { message, errors, list, submitted, newItem: { title, details } } = this.state;
 
-        let listDisplay = <li className="list-error center grey-text text-lighten-1">{error}</li>;
+        let listDisplay = <li className="list-error center grey-text text-lighten-1">{message}</li>;
         let errorsDisplay = [];
 
         if(list.length){

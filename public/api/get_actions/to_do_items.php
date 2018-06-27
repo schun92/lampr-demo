@@ -12,5 +12,5 @@ if(mysqli_num_rows($result)){
 
     $output['success'] = true;
 } else {
-    $output['error'] = 'No to do items found';
+    $output['message'] = 'No to do items found';
 }
