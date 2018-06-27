@@ -11,9 +11,14 @@ class Input extends Component {
 
     componentDidUpdate(prevProps, prevState){
         if(prevProps.submitted !== this.props.submitted && this.props.submitted){
+            
             this.setState({
                 className: ''
             });
+
+            if(this.props.focus){
+                this.input.focus();
+            }
         }
     }
 
@@ -45,6 +50,7 @@ class Input extends Component {
                     autoComplete={autoComplete || 'off'}
                     onBlur={this.handleBlur.bind(this)}
                     onFocus={this.handleFocus.bind(this)}
+                    ref={ el => this.input = el}
                 />
                 <label className={className}>{label}</label>
             </div>

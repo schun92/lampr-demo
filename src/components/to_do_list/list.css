@@ -17,3 +17,8 @@
 li button:first-of-type {
     margin-right: 10px;
 }
+
+.list-error {
+    font-size: 1.8em;
+    margin: 8px 0;
+}

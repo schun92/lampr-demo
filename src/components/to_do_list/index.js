@@ -15,7 +15,9 @@ class ToDoList extends Component {
                 title: '',
                 details: ''
             },
-            submitted: false
+            submitted: false,
+            error: 'Loading',
+            errors: []
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -30,11 +32,20 @@ class ToDoList extends Component {
     async getListData() {
         const response = await axios.get('/api/index.php?action=to_do_items');
 
-        console.log('GET DATA RESPONSE:', response);
+        const { error, listItems } = response.data;
 
-        this.setState({
-            list: response.data.listItems
-        });
+        let newState = {
+            list: [],
+            error: ''
+        };
+
+        if(listItems){
+            newState.list = listItems;
+        } else if (error){
+            newState.error = error
+        }
+
+        this.setState(newState);
     }
 
     async deleteItem(id) {
@@ -55,12 +66,19 @@ class ToDoList extends Component {
 
         const response = await axios.post('/api/index.php?action=add_item', item);
 
+        const { errors, success } = response.data;
+
+        if(!success){
+            return this.setState({ errors });
+        }
+
         this.setState({
             newItem: {
                 title: '',
                 details: ''
             },
-            submitted: true
+            submitted: true,
+            errors: []
         });
 
         this.getListData();
@@ -77,7 +95,6 @@ class ToDoList extends Component {
     }
 
     async handleToggleComplete(id, complete){
-        console.log('Complete ID:', id);
         const dataToSend = {
             id: id,
             complete: !complete
@@ -93,26 +110,42 @@ class ToDoList extends Component {
     }
 
     render() {
-        const { list, submitted, newItem: { title, details } } = this.state;
+        const { error, errors, list, submitted, newItem: { title, details } } = this.state;
 
-        const listElements = list.map(item => {
-            return <Item key={item.id} toggleComplete={this.handleToggleComplete.bind(this, item.id, item.complete)} deleteItem={this.deleteItem.bind(this, item.id)} {...item} />
-        });
+        let listDisplay = <li className="list-error center grey-text text-lighten-1">{error}</li>;
+        let errorsDisplay = [];
+
+        if(list.length){
+            listDisplay = list.map(item => {
+                return <Item key={item.id} toggleComplete={this.handleToggleComplete.bind(this, item.id, item.complete)} deleteItem={this.deleteItem.bind(this, item.id)} {...item} />
+            });
+        }
+
+        if(errors){
+            errorsDisplay = errors.map( err => <p key={err} className="red-text">{err}</p>);
+        }
 
         return (
             <div className="to-do-list">
                 <h1 className="center cyan-text text-accent-4">To Do List</h1>
                 <form onSubmit={this.addItem} className="row">
-                    <Input name="title" label="Title" value={title} onChange={this.handleInputChange} submitted={submitted} />
+                    <Input name="title" label="Title" value={title} onChange={this.handleInputChange} submitted={submitted} focus />
                     <Input name="details" label="Details" value={details} onChange={this.handleInputChange} submitted={submitted} />
 
-                    <div className="col s12 right-align">
-                        <button className="btn cyan accent-4">Add Item</button>
+                    <div className="col s12">
+                        <div className="row">
+                            <div className="col s10">
+                                {errorsDisplay}
+                            </div>
+                            <div className="col s2 right-align">
+                                <button className="btn cyan accent-4">Add Item</button>
+                            </div>
+                        </div>
                     </div>
 
                 </form>
                 <ul className="collection">
-                    {listElements}
+                    {listDisplay}
                 </ul>
             </div>
         );
