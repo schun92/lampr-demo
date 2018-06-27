@@ -1,8 +1,8 @@
 <img align="right" width="150" src="https://github.com/scbowler/react-php/blob/master/public/php-react.png">
 
-# PHP React Starter 
+# PHP React - To Do List 
 
-> This repo contains boilerplate code to aid in the creation of a new React app with Redux and a PHP back-end. Follow the below setup instructions to get started.
+> To do app example with ReactJS, PHP, and MySQL. Follow the below setup instructions to get started.
 
 ### Setup Instructions
 
@@ -13,9 +13,11 @@
 >    - `cd react-php`
 > 1. Install dependencies 
 >    - `npm install`
-> 1. Use MAMP or similar program to start an Apache server
+> 1. Use MAMP or similar program to start Apache and MySQL servers
 >    - Set root directory of server to the `public` folder of this project
 >    - Set Apache port to `8000`
+>    - Use phpMyAdmin (or similar) to create a database
+>    - Add an "items" table to your database by importing the `database/items_table.sql` file
 > 1. Start dev server
 >    - `npm start`
 > 1. Open a browser and navigate to `localhost:3000` You should see an empty to do list.
@@ -25,4 +27,4 @@
 > 1. Run webpack to bundle files
 >    - `npm run bundle`
 > 
-> **NOTE:** *After bundling you can not directly run your app locally. You must run your app from the root directory of a server.*
+> **NOTE:** *After bundling and placing on a web server. The `public` folder should be the web root*
