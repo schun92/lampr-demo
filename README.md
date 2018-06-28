@@ -1,4 +1,4 @@
-<img align="right" width="150" src="https://github.com/Learning-Fuze/LAMPR-demo/blob/master/public/php-react.png">
+<img align="right" width="150" src="https://github.com/Learning-Fuze/lampr-demo/blob/master/public/dist/php-react.png">
 
 # PHP React - LAMPR Stack Demo
 
