@@ -1,13 +1,8 @@
 {
-  "name": "react_starter",
+  "name": "lampr_stack",
   "version": "1.0.0",
-  "description": "Starting setup for react redux project",
+  "description": "Starting setup for LAMPR stack demo",
   "main": "index.js",
-  "proxy": {
-    "/api/*": {
-      "target": "http://localhost:8000"
-    }
-  },
   "scripts": {
     "start": "node dev_server.js",
     "bundle": "webpack --config webpack.prod.js --progress",
@@ -17,7 +12,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Learning-Fuze/react_starter.git"
+    "url": "https://github.com/Learning-Fuze/lampr-demo.git"
   },
   "dependencies": {
     "axios": "^0.18.0",

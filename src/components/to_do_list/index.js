@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Item from './item';
 import Input from './input';
-import { formatPostData } from '../../helpers';
 import './list.css';
 
 class ToDoList extends Component {
@@ -30,7 +29,8 @@ class ToDoList extends Component {
     }
 
     async getListData() {
-        const response = await axios.get('/api/index.php?action=to_do_items');
+        // Use get request to get list data
+        const response = { data: {}}; // Remove
 
         const { message, listItems } = response.data;
 
@@ -43,28 +43,24 @@ class ToDoList extends Component {
             newState.list = listItems;
         } else if (message){
             newState.message = message;
+        } else {
+            newState.message = 'Error with server'
         }
 
         this.setState(newState);
     }
 
     async deleteItem(id) {
-        const resp = await axios.delete('/api/index.php', {
-            params: {
-                action: 'delete_todo_item',
-                id: id
-            }
-        });
+        // Use delete method to delete a to do item based on ID
 
         this.getListData();
     }
 
     async addItem(e) {
         e.preventDefault();
-
-        const item = formatPostData(this.state.newItem);
-
-        const response = await axios.post('/api/index.php?action=add_item', item);
+        // Item @ this.state.newItem
+        // Use post method to send new item to DB
+        const response = {data: {success: true}}; // Remove
 
         const { errors, success } = response.data;
 
@@ -100,11 +96,7 @@ class ToDoList extends Component {
             complete: !complete
         };
 
-        const resp = await axios.patch('/api/index.php', dataToSend, {
-            params: {
-                action: 'to_do_set_complete'
-            }
-        });
+        // Use patch request to update item based on id
 
         this.getListData();
     }

@@ -1,6 +1,0 @@
-<?php 
-    
-$host = '<DATABASE HOST>';
-$database = '<DATABASE NAME>';
-$user = '<DATABASE USER>';
-$password = '<DATABASE USER PASSWORD>';
